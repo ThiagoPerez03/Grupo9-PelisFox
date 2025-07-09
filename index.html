@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TP2 - Chosco-Perez</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Librería para los gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -16,7 +17,9 @@
         <aside class="sidebar">
             <nav>
                 <ul>
+                    <!-- Botón para cargar datos de TMDB y guardarlos en Strapi -->
                     <li><button id="btnCargarDatos">Cargar Datos de APIs</button></li>
+                    <!-- Botón para leer datos de Strapi y mostrarlos -->
                     <li><button id="btnVisualizarDatos">Visualizar Datos</button></li>
                 </ul>
             </nav>
@@ -28,9 +31,11 @@
             <div class="chart-container">
                 <canvas id="moviesChart"></canvas>
             </div>
+            <!-- Contenedor para la lista detallada de películas -->
             <div id="lista-peliculas" class="movie-list-container">
-                </div>
-            </main>
+                <!-- Los datos de las películas se insertarán aquí con JavaScript -->
+            </div>
+        </main>
     </div>
 
     <footer class="footer">
