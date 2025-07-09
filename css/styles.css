@@ -1,0 +1,43 @@
+/* ... (Todos tus estilos anteriores se mantienen) ... */
+
+/* --- ESTILOS PARA LA LISTA DE PELÍCULAS --- */
+.movie-list-container {
+    margin-top: 30px; /* Espacio debajo del gráfico */
+    display: grid;
+    grid-template-columns: 1fr; /* Una columna por defecto */
+    gap: 15px; /* Espacio entre cada tarjeta de película */
+}
+
+.movie-card {
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo semi-transparente */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.movie-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.movie-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #444;
+}
+
+.movie-card p strong {
+    color: #111;
+}
+
+/* Para pantallas más grandes, podemos usar 2 columnas */
+@media (min-width: 1200px) {
+    .movie-list-container {
+        grid-template-columns: 1fr 1fr; /* Dos columnas */
+    }
+}
