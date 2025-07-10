@@ -3,37 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP2 - Chosco-Perez</title>
+    <title>TP2 - Chosco-Perez Cinema</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Librería para los gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts para un look de cine retro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <h1>TP Nro 2 - Chosco-Perez</h1>
+
+    <header class="cinema-marquee">
+        <div class="marquee-border">
+            <div class="marquee-content">
+                <h1>Chosco & Perez</h1>
+                <p>Presentan: Top 10 Películas de 20th Century Fox</p>
+            </div>
+        </div>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <!-- Botón para cargar datos de TMDB y guardarlos en Strapi -->
                     <li><button id="btnCargarDatos">Cargar Datos de APIs</button></li>
-                    <!-- Botón para leer datos de Strapi y mostrarlos -->
                     <li><button id="btnVisualizarDatos">Visualizar Datos</button></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="content-area">
-            <h2>Visualización de Datos</h2>
             <div id="feedback-area">Presiona un botón para comenzar...</div>
-            <div class="chart-container">
-                <canvas id="moviesChart"></canvas>
+            
+            <!-- Contenedor que simula una sala de cine -->
+            <div class="cinema-screen-container">
+                <div class="curtain left"></div>
+                <div class="screen">
+                    <canvas id="moviesChart"></canvas>
+                </div>
+                <div class="curtain right"></div>
             </div>
-            <!-- Contenedor para la lista detallada de películas -->
-            <div id="lista-peliculas" class="movie-list-container">
-                <!-- Los datos de las películas se insertarán aquí con JavaScript -->
+
+            <!-- Contenedor para la lista de tickets -->
+            <div id="lista-peliculas" class="tickets-container">
+                <!-- Los tickets se insertarán aquí con JavaScript -->
             </div>
         </main>
     </div>
