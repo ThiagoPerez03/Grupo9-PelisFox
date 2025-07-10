@@ -1,25 +1,19 @@
-// --- CONFIGURACIÓN ---
 const TMDB_API_KEY = 'c12576ed5d6ba4ec1644ced83a60a545';
 const FOX_COMPANY_ID = 25;
 const STRAPI_API_URL = 'https://gestionweb.frlp.utn.edu.ar/api/g9-peliculas-foxes';
 const STRAPI_API_TOKEN = '099da4cc6cbb36bf7af8de6f1f241f8c81e49fce15709c4cfcae1313090fa2c1ac8703b0179863b4eb2739ea65ae435e90999adb870d49f9f94dcadd88999763119edca01a6b34c25be92a80ed30db1bcacb20df40e4e7f45542bd501f059201ad578c18a11e4f5cd592cb25d6c31a054409caa99f11b6d2391440e9c72611ea';
 
-// --- ELEMENTOS DEL DOM ---
 const btnCargar = document.getElementById('btnCargarDatos');
 const btnVisualizar = document.getElementById('btnVisualizarDatos');
 const feedbackArea = document.getElementById('feedback-area');
 const chartCanvas = document.getElementById('moviesChart');
-const ticketsListDiv = document.getElementById('lista-peliculas'); // Nombre actualizado del div para tickets
+const ticketsListDiv = document.getElementById('lista-peliculas');
 
-let myMoviesChart = null; 
+let myMoviesChart = null;
 
-// --- EVENT LISTENERS ---
 btnCargar.addEventListener('click', cargarYGuardarPeliculas);
 btnVisualizar.addEventListener('click', obtenerYVisualizarPeliculas);
 
-// --- LÓGICA PRINCIPAL ---
-
-// 1. FUNCIÓN PARA CARGAR DATOS (CON LÓGICA "LEER Y COMPARAR")
 async function cargarYGuardarPeliculas() {
     feedbackArea.textContent = "Iniciando proceso... Obteniendo películas ya guardadas en Strapi...";
     try {
@@ -29,11 +23,7 @@ async function cargarYGuardarPeliculas() {
         if (!getResponse.ok) throw new Error(`No se pudo obtener la lista de películas existentes (Error ${getResponse.status}).`);
         
         const strapiData = await getResponse.json();
-        
-        // CORRECCIÓN: Accedemos a strapiData.data y luego a p.attributes.titulo
-        const peliculasExistentes = strapiData.data.map(p => p.titulo); 
-
-        console.log("Películas existentes en Strapi:", peliculasExistentes); 
+        const peliculasExistentes = strapiData.data.map(p => p.titulo);
 
         feedbackArea.textContent = `Se encontraron ${peliculasExistentes.length} películas en Strapi. Obteniendo datos de TMDB...`;
 
@@ -54,11 +44,10 @@ async function cargarYGuardarPeliculas() {
 
                 const generos = movieDetails.genres.map(g => g.name).join(', ');
 
-                // El campo en tu Strapi se llama 'generos' (plural)
                 const dataParaStrapi = {
                     data: {
                         titulo: movieDetails.title,
-                        genero: generos, // Usando el nombre de campo correcto
+                        genero: generos,
                         fecha_estreno: movieDetails.release_date,
                         cantidad_votos: movieDetails.vote_count,
                         promedio_votos: movieDetails.vote_average
@@ -96,10 +85,9 @@ async function cargarYGuardarPeliculas() {
     }
 }
 
-// 2. FUNCIÓN PARA OBTENER DATOS DE STRAPI Y VISUALIZARLOS
 async function obtenerYVisualizarPeliculas() {
     feedbackArea.textContent = "Obteniendo datos desde Strapi para visualizarlos...";
-    if (ticketsListDiv) ticketsListDiv.innerHTML = ''; // Limpiar lista anterior de tickets
+    if (ticketsListDiv) ticketsListDiv.innerHTML = '';
 
     try {
         const response = await fetch(STRAPI_API_URL, {
@@ -131,7 +119,7 @@ async function obtenerYVisualizarPeliculas() {
                 datasets: [{
                     label: 'Promedio de Votos (sobre 10)',
                     data: promedios,
-                    backgroundColor: 'rgba(255, 215, 0, 0.7)', // Color dorado para el gráfico
+                    backgroundColor: 'rgba(255, 215, 0, 0.7)',
                     borderColor: 'rgba(255, 215, 0, 1)',
                     borderWidth: 1
                 }]
@@ -139,11 +127,10 @@ async function obtenerYVisualizarPeliculas() {
             options: {
                 indexAxis: 'y', 
                 scales: { x: { beginAtZero: true, max: 10 } },
-                plugins: { legend: { display: false } } // Ocultamos la leyenda para un look más limpio
+                plugins: { legend: { display: false } }
             }
         });
 
-        // Llenar la lista de tickets
         if (ticketsListDiv) {
             ticketsListDiv.innerHTML = '';
             
